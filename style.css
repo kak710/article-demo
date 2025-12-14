@@ -1,0 +1,269 @@
+:root {
+  /* Light (radical reading mode) */
+  --bg: #f7f6f3;
+  --text-main: #1e1e1e;
+  --text-muted: #6e6e6e;
+  --accent: #444;
+  --nav-height: 80px; 
+  --masthead-bg: #f7f6f3; /* Explicitly defining the white color */
+}
+
+body.dark {
+  /* Dark reading mode */
+  --bg: #1c1c1c;
+  --text-main: #ededed;
+  --text-muted: #a0a0a0;
+  --accent: #8a8a8a;
+  /* Retain --masthead-bg as white in dark mode */
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text-main);
+  font-family: "IBM Plex Serif", serif;
+  line-height: 1.65;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+/* --- MASTHEAD (Branding Area) --- */
+.masthead {
+  position: relative; 
+  width: 100%;
+  height: var(--nav-height);
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 25;
+  
+  /* CRITICAL CHANGE: Always use the light background color */
+  background: var(--masthead-bg); 
+  
+  border-bottom: 1px solid rgba(0,0,0,0.08); 
+  transition: background 0.25s ease;
+  color: var(--text-main); 
+}
+
+/* Ensure the border color remains subtle dark in both modes */
+body.dark .masthead {
+    border-bottom-color: rgba(0,0,0,0.2); /* Use a dark border on the white background */
+}
+
+/* Ensure logos/text remain dark on the white background */
+body.dark .masthead .brand-icon img,
+body.dark .masthead .brand-text-img img {
+    /* Since the SVGs use currentColor, and the masthead is white,
+       we must set the color to the dark color manually for the logos */
+    filter: none;
+    color: var(--text-main); /* This ensures the text color is black-like */
+}
+
+
+.brand-icon {
+  height: 102px; 
+  width: 102px;
+  flex-shrink: 0;
+}
+
+.brand-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.masthead-center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 100%;
+    display: flex;
+    align-items: center;
+    pointer-events: none;
+}
+
+.brand-text-img {
+  height: 200px;
+  display: flex;
+  align-items: center;
+}
+
+.brand-text-img img {
+  height: 100%;
+  width: auto;
+  object-fit: contain;
+}
+
+.masthead > div:last-child {
+    width: 48px; 
+    visibility: hidden;
+}
+
+/* --- HERO / COVER --- */
+.hero {
+  position: relative;
+  height: 50vh;
+  min-height: 360px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 20px;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.2),
+    rgba(0,0,0,0.4)
+  ),
+  url('images/masthead.jpg') center/cover no-repeat;
+  filter: saturate(0.4);
+  z-index: -1;
+}
+
+.hero-title {
+  max-width: 720px;
+  color: #fff;
+}
+
+.hero-title h1 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 400;
+  margin-bottom: 12px;
+}
+
+.hero-title p {
+  font-family: "IBM Plex Sans", sans-serif;
+  opacity: 0.9;
+  font-size: 0.95rem;
+  letter-spacing: 0.03em;
+}
+
+/* --- ARTICLE BODY --- */
+article {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 64px 20px 96px;
+}
+
+article p {
+  margin-bottom: 1.4em;
+  font-size: 1.02rem;
+}
+
+article p.lead {
+  font-size: 1.15rem;
+  color: var(--text-main);
+}
+
+article h2 {
+  font-size: 1.3rem;
+  font-weight: 500;
+  margin: 3em 0 1em;
+}
+
+article hr {
+  border: none;
+  height: 1px;
+  background: var(--accent);
+  opacity: 0.2;
+  margin: 3em 0;
+}
+
+/* --- META & UTILS --- */
+.meta {
+  margin-top: 64px;
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.progress {
+  position: fixed;
+  top: 30px; 
+  right: 24px;
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 1rem;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+  z-index: 10;
+}
+
+/* Since the masthead is now always white, we need to ensure the mode toggle 
+   and progress are visible against both light and dark backgrounds. */
+body.dark .progress {
+    color: var(--text-muted); /* Dark mode page text color */
+}
+
+.mode-toggle {
+  position: fixed;
+  top: 26px;
+  left: 24px;
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 0.9rem;
+  background: transparent;
+  border: 1px solid var(--accent);
+  padding: 6px 10px;
+  color: var(--text-main);
+  cursor: pointer;
+  z-index: 10;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+
+.mode-toggle:hover {
+  opacity: 1;
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 600px) {
+  
+  .masthead { 
+    justify-content: center;
+    padding: 0 16px;
+    gap: 10px;
+  }
+  
+  .masthead-center {
+      position: static;
+      left: auto;
+      transform: none;
+      pointer-events: auto;
+  }
+  
+  .masthead > div:last-child {
+      display: none;
+  }
+  
+  .brand-text-img { height: 32px; }
+  .brand-icon { height: 36px; width: 36px; }
+
+  .hero { height: 45vh; }
+  article { padding-top: 48px; }
+  
+  .progress { top: auto; bottom: 16px; right: 16px; font-size: 0.7rem; }
+  
+  .mode-toggle {
+    top: auto;
+    bottom: 16px;
+    left: 16px;
+    right: auto;
+    border-color: var(--accent);
+    color: var(--text-main);
+    background: var(--bg);
+  }
+}
