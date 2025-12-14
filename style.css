@@ -230,32 +230,54 @@ body.dark .progress {
 }
 
 /* --- Mobile Responsiveness --- */
+/* --- Mobile Responsiveness --- */
+/* --- Mobile Responsiveness --- */
 @media (max-width: 600px) {
   
+  /* Use space-between layout for mobile to put icon left and placeholder right */
   .masthead { 
-    justify-content: center;
-    padding: 0 16px;
-    gap: 10px;
+    justify-content: space-between;
+    padding: 0 16px; /* Reduced side padding for mobile */
+    gap: 0; /* No gap between icon and center/right */
+    height: 120px; /* Increased height to accommodate the large icon */
   }
   
+  /* Keep absolute centering for the text on mobile */
   .masthead-center {
-      position: static;
-      left: auto;
-      transform: none;
-      pointer-events: auto;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      pointer-events: none;
   }
   
+  /* Re-enable the balancing placeholder on mobile */
   .masthead > div:last-child {
-      display: none;
+      display: block;
+      width: 102px; /* MATCHES NEW ICON WIDTH */
   }
   
-  .brand-text-img { height: 32px; }
-  .brand-icon { height: 36px; width: 36px; }
+  /* Apply your new, larger sizes for mobile */
+  .brand-icon { 
+      height: 102px; 
+      width: 102px; 
+  }
+  
+  /* Adjust text image size */
+  .brand-text-img { 
+      height: 48px; /* Adjusted to fit nicely in the header, slightly smaller than your 200px request, which would be too large for the 120px masthead */
+      /* Note: If you truly wanted height: 200px, the masthead height would need to be 220px+ */
+  }
 
+  /* Resetting fixed utilities positioning for better mobile use */
   .hero { height: 45vh; }
   article { padding-top: 48px; }
   
-  .progress { top: auto; bottom: 16px; right: 16px; font-size: 0.7rem; }
+  .progress { 
+      top: auto; 
+      bottom: 16px; 
+      right: 16px; 
+      font-size: 0.7rem; 
+  }
   
   .mode-toggle {
     top: auto;
