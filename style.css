@@ -232,7 +232,7 @@ body.dark .progress {
 /* --- Mobile Responsiveness --- */
 /* --- Mobile Responsiveness --- */
 /* --- Mobile Responsiveness --- */
-@media (max-width: 600px) {
+media (max-width: 600px) {
   
   /* Use space-between layout for mobile to put icon left and placeholder right */
   .masthead { 
@@ -258,15 +258,17 @@ body.dark .progress {
   
   /* Apply your new, larger sizes for mobile */
   .brand-icon { 
-      height: 102px; 
-      width: 102px; 
+      height: 92px; 
+      width: 92px; 
+     align-items: center;
   }
   
-  /* Adjust text image size */
+/* Adjust text image size */
   .brand-text-img { 
-      height: 48px; /* Adjusted to fit nicely in the header, slightly smaller than your 200px request, which would be too large for the 120px masthead */
+      height: 180px; /* Adjusted to fit nicely in the header, slightly smaller than your 200px request, which would be too large for the 120px masthead */
       /* Note: If you truly wanted height: 200px, the masthead height would need to be 220px+ */
-  }
+      align-items: right;
+}
 
   /* Resetting fixed utilities positioning for better mobile use */
   .hero { height: 45vh; }
